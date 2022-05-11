@@ -1,4 +1,4 @@
-package handlers
+package auth
 
 import (
 	"github.com/Feruz666/api-gateway/util"

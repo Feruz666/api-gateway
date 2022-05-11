@@ -1,7 +1,8 @@
 package pkg
 
 import (
-	"github.com/Feruz666/api-gateway/pkg/auth/handlers"
+	auth "github.com/Feruz666/api-gateway/pkg/auth/handlers"
+	document "github.com/Feruz666/api-gateway/pkg/document/handlers"
 	"github.com/Feruz666/api-gateway/util"
 	"github.com/gin-gonic/gin"
 )
@@ -23,8 +24,11 @@ func ServiceRoutes(config util.Config) (*Server, error) {
 func (server *Server) setupRouter() {
 	router := gin.Default()
 
-	router.POST("/auth", handlers.CreateUser)
-	router.POST("/auth/login", handlers.LoginUser)
+	router.POST("/auth", auth.CreateUser)
+	router.POST("/auth/login", auth.LoginUser)
+
+	// Example route
+	router.POST("/doc", document.Example)
 
 	server.router = router
 }
