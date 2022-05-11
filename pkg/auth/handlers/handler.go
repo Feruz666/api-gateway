@@ -6,9 +6,9 @@ import (
 )
 
 func CreateUser(ctx *gin.Context) {
-	util.GateWayUrl("http://localhost:8080/signup", ctx)
+	util.PostGateWayUrl("http://localhost:8080/signup", ctx)
 }
 
 func LoginUser(ctx *gin.Context) {
-	util.GateWayUrl("http://localhost:8080/users/login", ctx)
+	util.PostGateWayUrl("http://localhost:8080/users/login", ctx)
 }

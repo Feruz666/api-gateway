@@ -29,6 +29,7 @@ func (server *Server) setupRouter() {
 
 	// Example route
 	router.POST("/doc", document.Example)
+	router.GET("/getdoc", document.GetExample)
 
 	server.router = router
 }

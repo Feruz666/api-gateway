@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"io"
+	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func GateWayUrl(url string, ctx *gin.Context) {
+func PostGateWayUrl(url string, ctx *gin.Context) {
 	data, err := ctx.GetRawData()
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, ErrorResponce(err))
@@ -31,6 +33,23 @@ func GateWayUrl(url string, ctx *gin.Context) {
 
 	jsonData := make(map[string]interface{})
 	json.Unmarshal([]byte(string(b)), &jsonData)
+
+	ctx.JSON(resp.StatusCode, jsonData)
+}
+
+func GetGateWayUrl(url string, ctx *gin.Context) {
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, ErrorResponce(err))
+	}
+
+	jsonData := make(map[string]interface{})
+	json.Unmarshal([]byte(body), &jsonData)
 
 	ctx.JSON(resp.StatusCode, jsonData)
 }
