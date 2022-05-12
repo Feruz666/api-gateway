@@ -3,6 +3,7 @@ package pkg
 import (
 	auth "github.com/Feruz666/api-gateway/pkg/auth/handlers"
 	document "github.com/Feruz666/api-gateway/pkg/document/handlers"
+	maps "github.com/Feruz666/api-gateway/pkg/maps/handlers"
 	"github.com/Feruz666/api-gateway/util"
 	"github.com/gin-gonic/gin"
 )
@@ -30,6 +31,10 @@ func (server *Server) setupRouter() {
 	// Example route
 	router.POST("/doc", document.Example)
 	router.GET("/getdoc", document.GetExample)
+
+	// Maps route
+	router.GET("/maps/workspaces", maps.GetWorkspaces)
+	router.POST("/maps/workspaces/workspace", maps.CreateWorkspace)
 
 	server.router = router
 }
