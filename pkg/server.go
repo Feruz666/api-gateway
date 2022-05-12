@@ -31,6 +31,7 @@ func (server *Server) setupRouter() {
 	// Example route
 	router.POST("/doc", document.Example)
 	router.GET("/getdoc", document.GetExample)
+	router.DELETE("/deletedoc", document.GetExample)
 
 	// Maps route
 	router.GET("/maps/workspaces", maps.GetWorkspaces)
