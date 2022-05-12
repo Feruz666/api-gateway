@@ -14,5 +14,5 @@ func Example(ctx *gin.Context) {
 }
 
 func GetExample(ctx *gin.Context) {
-	util.GetGateWayUrl("https://dummy.restapiexample.com/api/v1/employees", ctx)
+	util.GetGateWayUrl("https://jsonplaceholder.typicode.com/posts", ctx)
 }
