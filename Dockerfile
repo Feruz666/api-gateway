@@ -3,6 +3,7 @@ FROM golang:1.18.0-alpine3.14 as builder
 
 WORKDIR /app
 COPY . .
+RUN go mod download
 RUN go build -o main cmd/server/main.go
 
 # Run stage
