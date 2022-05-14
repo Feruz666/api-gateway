@@ -7,7 +7,7 @@ import (
 
 // Workspace handlers
 func GetWorkspaces(ctx *gin.Context) {
-	util.GetGateWayUrl("http://localhost:3001/0.0/workspaces/", ctx)
+	util.GetGateWayUrl("http://localhost:3001/0.0/workspaces", ctx)
 }
 
 func CreateWorkspace(ctx *gin.Context) {
@@ -58,7 +58,7 @@ func DeleteDatastore(ctx *gin.Context) {
 
 // LayerGroups handlers
 func GetLayerGroups(ctx *gin.Context) {
-	util.GetGateWayUrl("http://localhost:3001/0.0/layergroups/", ctx)
+	util.GetGateWayUrl("http://localhost:3001/0.0/layergroups", ctx)
 }
 
 func GetLayerGroup(ctx *gin.Context) {
