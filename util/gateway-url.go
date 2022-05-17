@@ -7,7 +7,9 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 
+	util "github.com/Feruz666/api-gateway/util/maps"
 	"github.com/gin-gonic/gin"
 )
 
@@ -101,6 +103,85 @@ func DeleteGateWayUrl(url string, ctx *gin.Context) {
 	jsonData := make(map[string]interface{})
 	json.Unmarshal([]byte(body), &jsonData)
 	ctx.JSON(resp.StatusCode, jsonData)
+}
+
+// Get WMS
+func GetWMSGateWayURL(url string, ctx *gin.Context) {
+
+	urlParams := &util.WMSParams{}
+
+	if err := ctx.ShouldBind(urlParams); err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": "URL parametr unmarshal error, please check url parametrs",
+		})
+
+		return
+	}
+
+	data, err := ctx.GetRawData()
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": "request to wms service error",
+		})
+
+		return
+	}
+	responseBody := bytes.NewBuffer(data)
+	if responseBody == nil {
+		responseBody = nil
+	}
+
+	client := &http.Client{}
+	req, err := http.NewRequest(
+		"GET", url, responseBody,
+	)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	query := req.URL.Query()
+
+	query.Add("service", urlParams.Service)
+	query.Add("version", urlParams.Version)
+	query.Add("request", urlParams.Request)
+	query.Add("layers", urlParams.Layers)
+	query.Add("bbox", urlParams.BBox)
+	query.Add("width", urlParams.Width)
+	query.Add("height", urlParams.Height)
+	query.Add("srs", urlParams.SRS)
+	query.Add("styles", urlParams.Styles)
+	query.Add("format", urlParams.Format)
+	query.Add("transparent", urlParams.Transparent)
+
+	req.URL.RawQuery = query.Encode()
+
+	req.Header.Add("Accept", "text/html") // добавляем заголовок Accept
+
+	resp, err := client.Do(req)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": "request to wms service error",
+		})
+
+		return
+	}
+
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": "request to wms service error",
+		})
+
+		return
+	}
+
+	ctx.Header("Content-Type", "image/png")
+	ctx.Header("Content-Length", strconv.Itoa(len(body)))
+	ctx.Writer.WriteHeader(http.StatusOK)
+	ctx.Writer.Write(body)
 }
 
 // ErrorResponce ...

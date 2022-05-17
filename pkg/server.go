@@ -51,6 +51,7 @@ func (server *Server) setupRouter() {
 	router.GET("/maps/featuretypes", maps.GetFeatureTypes)
 	router.GET("/maps/featuretypes/featuretype", maps.GetFeatureType)
 	router.DELETE("/maps/featuretypes/featuretype", maps.DeleteFeatureType)
+	router.GET("/maps/wms", maps.GetWMS)
 
 	server.router = router
 }

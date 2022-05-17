@@ -90,3 +90,7 @@ func GetMapsConfig() string {
 
 	return config.MAPS_SYSTEM_ADDRESS
 }
+
+func GetWMS(ctx *gin.Context) {
+	util.GetWMSGateWayURL(url+"/0.0/wms", ctx)
+}
