@@ -1,6 +1,8 @@
 package maps
 
 import (
+	"bytes"
+	"io/ioutil"
 	"log"
 
 	"github.com/Feruz666/api-gateway/util"
@@ -26,8 +28,29 @@ func DeleteWorkspace(ctx *gin.Context) {
 	util.DeleteGateWayUrl(url+"/0.0/workspaces/workspace", ctx)
 }
 
+// Styles handler
+func GetStyles(ctx *gin.Context) {
+	workspace := ctx.Query("workspace")
+	ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer([]byte("{\"workspace\":\"" + workspace + "\"}")))
+	ctx.Request.Header.Set("Access-Control-Allow-Origin", "*")
+	ctx.Request.Header.Set("Access-Control-Allow-Credentials", "true")
+	ctx.Request.Header.Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	ctx.Request.Header.Set("Access-Control-Allow-Origin", "POST, DELETE, GET, PUT")
+	// body, _ := ctx.Request.GetBody()
+	// ctx.Request.Header.Set("Content-Length"))
+	util.GetGateWayUrl(url+"/0.0/styles", ctx)
+}
+
 // Layers handlers
 func GetLayers(ctx *gin.Context) {
+	workspace := ctx.Query("workspace")
+	ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer([]byte("{\"workspace\":\"" + workspace + "\"}")))
+	ctx.Request.Header.Set("Access-Control-Allow-Origin", "*")
+	ctx.Request.Header.Set("Access-Control-Allow-Credentials", "true")
+	ctx.Request.Header.Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	ctx.Request.Header.Set("Access-Control-Allow-Origin", "POST, DELETE, GET, PUT")
+	// body, _ := ctx.Request.GetBody()
+	// ctx.Request.Header.Set("Content-Length"))
 	util.GetGateWayUrl(url+"/0.0/layers", ctx)
 }
 
@@ -41,6 +64,12 @@ func DeleteLayers(ctx *gin.Context) {
 
 // Datastore handlers
 func GetDatastores(ctx *gin.Context) {
+	workspace := ctx.Query("workspace")
+	ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer([]byte("{\"workspace\":\"" + workspace + "\"}")))
+	ctx.Request.Header.Set("Access-Control-Allow-Origin", "*")
+	ctx.Request.Header.Set("Access-Control-Allow-Credentials", "true")
+	ctx.Request.Header.Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+	ctx.Request.Header.Set("Access-Control-Allow-Origin", "POST, DELETE, GET, PUT")
 	util.GetGateWayUrl(url+"/0.0/datastores", ctx)
 }
 

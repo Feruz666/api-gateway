@@ -35,7 +35,7 @@ func PostGateWayUrl(url string, ctx *gin.Context) {
 
 	jsonData := make(map[string]interface{})
 	json.Unmarshal([]byte(string(b)), &jsonData)
-
+	ctx.Header("Access-Control-Allow-Origin", "*")
 	ctx.JSON(resp.StatusCode, jsonData)
 }
 
@@ -69,6 +69,9 @@ func GetGateWayUrl(url string, ctx *gin.Context) {
 	}
 	jsonData := make(map[string]interface{})
 	json.Unmarshal([]byte(body), &jsonData)
+	ctx.Header("Access-Control-Allow-Origin", "*")
+	ctx.Header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
+	ctx.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 	ctx.JSON(resp.StatusCode, jsonData)
 }
 
