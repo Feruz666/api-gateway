@@ -183,6 +183,9 @@ func GetWMSGateWayURL(url string, ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "image/png")
 	ctx.Header("Content-Length", strconv.Itoa(len(body)))
+	ctx.Header("Access-Control-Allow-Origin", "*")
+	ctx.Header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE")
+	ctx.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 	ctx.Writer.WriteHeader(http.StatusOK)
 	ctx.Writer.Write(body)
 }
