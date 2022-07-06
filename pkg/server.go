@@ -4,6 +4,7 @@ import (
 	auth "github.com/Feruz666/api-gateway/pkg/auth/handlers"
 	document "github.com/Feruz666/api-gateway/pkg/document/handlers"
 	maps "github.com/Feruz666/api-gateway/pkg/maps/handlers"
+	sensors "github.com/Feruz666/api-gateway/pkg/sensor/handlers"
 	"github.com/Feruz666/api-gateway/util"
 	"github.com/gin-gonic/gin"
 )
@@ -24,9 +25,13 @@ func ServiceRoutes(config util.Config) (*Server, error) {
 
 func (server *Server) setupRouter() {
 	router := gin.Default()
-
+	// Auth route
 	router.POST("/auth", auth.CreateUser)
 	router.POST("/auth/login", auth.LoginUser)
+
+	// Sensors route
+	router.POST("/sensors", sensors.CreateSensor)
+	router.GET("/sensors", sensors.GetSensors)
 
 	// Example route
 	router.POST("/doc", document.Example)

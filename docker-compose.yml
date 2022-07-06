@@ -9,6 +9,7 @@ services:
     environment:
       - AUTH_SYSTEM_ADDRESS=http://auth-system-api-1:3002
       - MAPS_SYSTEM_ADDRESS=http://geoserver-service:3001
+      - SENSORS_SYSTEM_ADDRESS=http://sensorsbackend:3004
 networks:
   default:
     external:

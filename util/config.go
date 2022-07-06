@@ -9,6 +9,7 @@ type Config struct {
 	SERVER_ADDRESS      string `mapstructure:"SERVER_ADDRESS"`
 	AUTH_SYSTEM_ADDRESS string `mapstructure:"AUTH_SYSTEM_ADDRESS"`
 	MAPS_SYSTEM_ADDRESS string `mapstructure:"MAPS_SYSTEM_ADDRESS"`
+	SENSORS_SYSTEM_ADDRESS string `mapstructure:"SENSORS_SYSTEM_ADDRESS"`
 }
 
 // LoadConfig reads configuration from file or environment variables

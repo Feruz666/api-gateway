@@ -184,7 +184,7 @@ func GetWMSGateWayURL(url string, ctx *gin.Context) {
 	ctx.Header("Content-Type", "image/png")
 	ctx.Header("Content-Length", strconv.Itoa(len(body)))
 	ctx.Writer.WriteHeader(http.StatusOK)
-	ctx.Writer.Write(body)
+	ctx.Writer.Write(body) 
 }
 
 // ErrorResponce ...
