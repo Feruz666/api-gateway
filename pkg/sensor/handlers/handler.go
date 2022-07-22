@@ -17,6 +17,10 @@ func GetSensors(ctx *gin.Context) {
 	util.GetGateWayUrl(url+"/api/sensors", ctx)
 }
 
+func GetSensorsCharts(ctx *gin.Context) {
+	util.GetGateWayUrl(url+"/api/sensors/charts", ctx)
+}
+
 func GetSensorConfig() string {
 	config, err := util.LoadConfig(".")
 	if err != nil {
